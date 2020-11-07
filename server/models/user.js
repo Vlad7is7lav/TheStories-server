@@ -52,7 +52,7 @@ userSchema.pre('save', function(next){
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
     var user = this;
-    bCrypt.comparePassword(candidatePassword, user.password, (err, isMatch)=>{
+    bCrypt.compare(candidatePassword, user.password, (err, isMatch)=>{
         if(err) return cb(err);
         cb(null, isMatch)
     })
