@@ -22,6 +22,7 @@ router.post('/register', function(req, res){
 
 router.post('/login', function(req, res){
     User.findOne({'email': req.body.email}, (err,user)=>{
+        if (err) throw err;
         if(!user) return res.json({
             auth: false,
             message: 'User not found',
@@ -39,7 +40,13 @@ router.post('/login', function(req, res){
             user.generateToken((err, user)=>{
                 if(err) return res.status(400).send(err);
                 res.cookie('auth', user.token).json({
-                    auth: true
+                    auth: true,
+                    userData: {
+                            id: user._id,
+                            email: user.email,
+                            name: user.name,
+                            lastname: user.lastname
+                        }
                 });
             })
         })
@@ -49,10 +56,10 @@ router.post('/login', function(req, res){
 router.get('/auth', auth, function(req, res){
     res.json({auth: true,
     userData: {
-        id: req.user,
-        email: req.email,
-        name: req.name,
-        lastname: req.lastname
+        id: req.user._id,
+        email: req.user.email,
+        name: req.user.name,
+        lastname: req.user.lastname
         }
     })
 })
