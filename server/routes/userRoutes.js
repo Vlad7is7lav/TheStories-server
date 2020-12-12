@@ -30,12 +30,11 @@ router.post('/login', function(req, res){
         });
 
         user.comparePassword(req.body.password, (err, isMatch)=>{
-            if (err) throw err;
-            if(!isMatch) return res.status(400).send({
-                auth: false,
-                message: 'Wrong password',
-                userData: false
-            })
+            if(!isMatch) return res.json({
+                auth:false,
+                message:'Wrong password',
+                userData:false
+            });
 
             user.generateToken((err, user)=>{
                 if(err) return res.status(400).send(err);

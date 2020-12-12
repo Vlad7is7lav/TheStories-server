@@ -18,7 +18,7 @@ router.route('/story')
     .populate('ownerId','name')
     .exec((err,doc)=>{
         if(err) return res.status(400).send(err);
-        res.send(doc)
+        res.send(...doc)
     })
 })
 .post(auth, (req, res)=>{
