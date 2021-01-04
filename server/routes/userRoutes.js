@@ -58,7 +58,11 @@ router.get('/auth', auth, function(req, res){
         id: req.user._id,
         email: req.user.email,
         name: req.user.name,
-        lastname: req.user.lastname
+        lastname: req.user.lastname,
+        age: req.user.age,
+        country: req.user.country,
+        city: req.user.city,
+        favBooks: req.user.favBooks
         }
     })
 })
@@ -68,6 +72,17 @@ router.get('/logout', auth, function(req, res){
         if(err) return res.status(400).send(err);
         res.status(200).send('Bye')
      })
+})
+
+router.patch('/update', auth, function(req, res){
+    User.findByIdAndUpdate(req.body.userData.id, req.body.userData, {new: true}, (err, doc)=> {
+        if(err) return res.status(400).send(err);
+        res.json({
+            auth: true,
+            success: true,
+            userData: doc
+        })
+    })
 })
 
 module.exports = router;

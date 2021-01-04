@@ -15,8 +15,10 @@ const app = express();
 //MIDDLEWARE
 app.use(bodyParser.json());
 app.use(coockieParser());
-app.use('/api/user', userRoute)
-app.use('/api/stories', storyRoute)
+app.use('/api/user', userRoute);
+app.use('/api/stories', storyRoute);
+
+// if(process.env.NODE_ENV === 'production') 
 
 
 mongoose.connect(config.DATABASE, {
@@ -34,5 +36,5 @@ mongoose.set('useUnifiedTopology', true);
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
-    console.log(`Servr is started in port: ${port}`);
+    console.log(`Server is started in port: ${port}`);
 })

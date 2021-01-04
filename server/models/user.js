@@ -27,6 +27,25 @@ const userSchema = mongoose.Schema({
         required: false,
         maxLength: 20
     },
+    age: {
+        type: String,
+        required: false,
+        maxLength: 2
+    },
+    country: {
+        type: String,
+        required: false,
+        maxLength: 20
+    },
+    city: {
+        type: String,
+        required: false,
+        maxLength: 20
+    },
+    favBooks: {
+        type: String,
+        required: false
+    },
     role: {
         type: Number,
         default: 0
