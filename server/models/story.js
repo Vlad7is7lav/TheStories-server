@@ -14,7 +14,7 @@ const storySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    pages: {
+    words: {
         type: String,
         default: 'n/a'
     },
