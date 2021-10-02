@@ -1,7 +1,7 @@
 const config = {
     production: {
         SECRET: process.env.SECRET,
-        DATABSE: process.env.DATABASE
+        DATABASE: process.env.DATABASE_URI
     },
 
     default: {

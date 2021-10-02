@@ -3,8 +3,6 @@ const user = require('../models/user');
 const router = express.Router();
 
 //MODELS
-
-const {User} = require('../models/user');
 const {Story} = require('../models/story');
 
 //MIDDLEWARE
@@ -25,7 +23,8 @@ router.route('/story')
     let story = new Story({...req.body, ownerId: req.user._id});
 
     story.save((err,doc)=>{
-        if(err) return res.json({success: err});
+        if(err) return res.json({post: false, success: err});
+        console.log(doc)
         res.status(200).json({post: true, bookId: doc._id});
     })
 })

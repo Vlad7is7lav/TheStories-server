@@ -11,12 +11,18 @@ const {auth} = require('../middleware/auth');
 
 ////
 router.post('/register', function(req, res){
-    console.log('works');
-    const user1 = new User(req.body);
-
-    user1.save((err, doc)=>{
-        if(err) return res.json({success: err});
-        res.status(200).json({success: true, user: doc});
+    User.findOne({'email': req.body.email}, (err, user)=> {
+        if (!user) {
+            const user1 = new User(req.body);
+            user1.save((err, doc)=>{
+                if(err) return res.json({success: false});
+                res.status(200).json({success: true, userData: doc});
+            })
+        } else {
+            return res.json({
+                registered: true
+            })
+        }   
     })
 })
 

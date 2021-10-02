@@ -20,7 +20,7 @@ const storySchema = mongoose.Schema({
     },
     rating: {
         type: Number,
-        required: true,
+        required: false,
         min: 1,
         max: 10
     },
@@ -33,4 +33,4 @@ const storySchema = mongoose.Schema({
 }, {timestamps: true});
 
 const Story = mongoose.model('Story', storySchema);
-module.exports = {Story}
+module.exports = {Story};
